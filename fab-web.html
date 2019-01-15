@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link href="css/fab-web.css" rel="stylesheet" type="text/css">
+	<link href="css/form-styles(label).css" rel="stylesheet" type="text/css">
+	<!-- <link href="css/squre-mode.css" rel="stylesheet" type="text/css"> -->
+	<meta name="viewport" content="width=device-width">
+	<meta charset="UTF-8">
+
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="https://cliclap-production-cors-proxy.azurewebsites.net/app-lon05.marketo.com/js/forms2/js/forms2.min.js"></script>
+	<title>CliClap Test</title>
+</head>
+<body>
+	<header>
+	<style>
+	/*------------------------------------*\ 
+  #BASE-STYLES 
+\*------------------------------------*/  
+  
+/** 
+ * Just in case this is not already set on the page, we have to change the 
+ * default box sizing for Marketo Forms to have a custom gutter width. 
+ */  
+  
+.mktoForm *,  
+.mktoForm *::before,  
+.mktoForm *::after {  
+  box-sizing: border-box;  
+}  
+  
+/** 
+ * Set all relevant form elements to have 100% width 
+ */  
+  
+.mktoForm,  
+.mktoForm .mktoField,  
+.mktoForm .mktoHtmlText,  
+.mktoForm .mktoFormCol,  
+.mktoForm .mktoFieldWrap,  
+.mktoForm .mktoCheckboxList,  
+.mktoForm .mktoRadioList {  
+  width: 100% !important;  
+}  
+  
+/** 
+ * Hide default gutter and offset elements in Marketo Forms 
+ */  
+  
+.mktoForm .mktoOffset,  
+.mktoForm .mktoGutter {  
+  display: none;  
+}  
+  
+/** 
+ * Vertical form row spacing, optional 
+ */  
+  
+.mktoForm .mktoFieldDescriptor {  
+  margin-bottom: 10px;  
+}  
+  
+/** 
+ * This is a progressive enhancement for all browsers that support 
+ * flexbox (IE10+). Other browser will just show the form fields in 
+ * one column opposed to multiple columns.  
+ * 
+ * 1. Breakpoint: One column -> Multiple columns 
+ * 2. Column gutter width 
+ */  
+  
+@media (min-width: 740px) { /* [1] */  
+  .mktoForm .mktoFormRow {  
+    display: -webkit-box;  
+    display: -ms-flexbox;  
+    display: flex;  
+    margin-right: -10px; /* [2] */  
+  }  
+  
+  .mktoForm .mktoFormRow .mktoFormCol {  
+    min-width: 0;  
+    padding-right: 10px; /* [2] */  
+  }  
+}  
+  
+/* 
+ * As we removed all default styling, we have to show the asterix and  
+ * checkboxes/radio button in the same line than labels 
+ */  
+  
+.mktoForm .mktoAsterix,  
+.mktoForm .mktoCheckboxList input,  
+.mktoForm .mktoRadioList input {  
+  display: inline-block;  
+  width: auto !important;  
+}  
+  
+/** 
+ * As textboxes are always 100% wide, there's no need to resize them horizontally 
+ */  
+  
+.mktoForm textarea.mktoField {  
+  resize: vertical !important; /* [1] */  
+}  
+  
+  
+  
+  
+/*------------------------------------*\ 
+  #CUSTOM-STYLES 
+\*------------------------------------*/  
+  
+/** 
+ * Visually  hide the input elements by moving them outside the visible area. 
+ */  
+  
+.mktoForm .mktoCheckboxList > input,  
+.mktoForm .mktoRadioList > input {  
+  position: absolute;  
+  left: -9999px;  
+}  
+  
+/** 
+ * 1. Fake checkboxes/radio buttons will be positioned relatively to this element. 
+ * 2. Adjust padding to your needs. Please note that the left padding needs to be 
+ *    higher to leave space for the custom checkbox. 
+ */  
+  
+.mktoForm .mktoCheckboxList > label,  
+.mktoForm .mktoRadioList > label {  
+  position: relative; /* [1] */  
+  padding: 0 0 5px 33px; /* [2] */  
+}  
+  
+/** 
+ * Fake checkboxes to allow custom styling. These styles are for unchecked checkboxes  
+ * or radio button. 
+ */  
+  
+.mktoForm .mktoCheckboxList label::before,  
+.mktoForm .mktoRadioList label::before {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 18px;  
+  height: 18px;  
+  background: lightgray;  
+  border: 2px solid lightgray;  
+  content: "";  
+}  
+  
+/** 
+ * Styling for the checked state of checkboxes and radio buttons. 
+ */  
+  
+.mktoForm .mktoCheckboxList input:checked + label::before,  
+.mktoForm .mktoRadioList input:checked + label::before {  
+  background-color: red;  
+}  
+  
+/** 
+ * Style radio buttons slightly differently. 
+ */  
+  
+.mktoForm .mktoRadioList label::before {  
+  border-radius: 50%;  
+}  
+
+.mktoForm .mktoFormRow .mktoFormCol{
+min-width:auto;
+}
+	</style>
+	<script>
+	MktoForms2.whenRendered(function(form) {  
+  var formEl = form.getFormElem()[0];  
+  destyleMktoForm(form);  
+  moveCheckboxesToTheLeft(form);  
+  formEl.setAttribute("data-styles-ready", "true");  
+});  
+  
+/* 
+ * @author Sanford Whiteman 
+ * @version v1.103 
+ * @license MIT License: This license must appear with all reproductions of this software. 
+ * 
+ * Create a completely barebones, user-styles-only Marketo form 
+ * by removing inline STYLE attributes and disabling STYLE and LINK elements 
+ */  
+function destyleMktoForm(form) {  
+  var formEl = form.getFormElem()[0];  
+  var arrayFrom = Function.prototype.call.bind(Array.prototype.slice);  
+  
+  // remove element styles from <form> and children  
+  var styledEls = arrayFrom(formEl.querySelectorAll("[style]")).concat(formEl);  
+  styledEls.forEach(function(el) {  
+    el.removeAttribute("style");  
+  });  
+  
+  // disable remote stylesheets and local <style>s  
+  var styleSheets = arrayFrom(document.styleSheets);  
+  styleSheets.forEach(function(ss) {  
+    if (  
+      [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 ||  
+      formEl.contains(ss.ownerNode)  
+    ) {  
+      ss.disabled = true;  
+    }  
+  });  
+}  
+  
+/** 
+ * By default all checkboxes and radio buttons are right aligned in 
+ * Marketo Forms. This function moves these elements to the left side. 
+ */  
+function moveCheckboxesToTheLeft(form) {  
+  var formEl = form.getFormElem()[0];  
+  var formRowEl = formEl.querySelectorAll(".mktoFormRow");  
+  
+  
+  for (var i = 0; i < formRowEl.length; i++) {  
+    // Get all checkboxes and radio buttons within form row  
+    var formCheckboxEl = formRowEl[i].querySelectorAll(  
+      "input[type=checkbox], input[type=radio]"  
+    );  
+    var hasOnlyOneCheckbox =   
+      formCheckboxEl !== null && formCheckboxEl.length === 1;  
+      
+    // Check if there's only one of these elements in that row to  
+    // ensure to only transform single checkbox / radio button elements  
+    if (hasOnlyOneCheckbox) {  
+      var formCheckboxLabel = formRowEl[i].querySelectorAll(  
+        "label[for=" + formCheckboxEl[0].getAttribute("name") + "],\  
+         label[for=" + formCheckboxEl[0].getAttribute("id") + "]"  
+      );  
+        
+      // Check if second label element is empty which should be the case   
+      // for all single checkbox / radio button elements  
+      if (formCheckboxLabel[1].textContent === "") {  
+        formCheckboxLabel[1].innerHTML = formCheckboxLabel[0].innerHTML;  
+        formCheckboxLabel[0].innerHTML = "";  
+      }  
+    }  
+  }  
+}  
+	</script>
+	</header>
+	<main></main>
+	<footer>
+		<aside>
+			<div id="hidden_bg"></div>
+			<div class="hexagon" id="hexagon">
+				<span class="hover_text">Subscribe Now</span>
+				<div class="pic_place"	id="pic_opened">
+					<svg class="pic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><defs><style>.cls-1,.cls-2{fill:#fff;fill-rule:evenodd;}.cls-1{opacity:0.2;}</style></defs><title>Fab</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M22,0A22,22,0,1,1,0,22,22,22,0,0,1,22,0Z"/><path class="cls-2" d="M22,12.1A9.9,9.9,0,1,1,12.1,22,9.9,9.9,0,0,1,22,12.1Z"/><path class="cls-1" d="M22,6.19A15.81,15.81,0,1,1,6.19,22,15.81,15.81,0,0,1,22,6.19Z"/></g></g></svg>
+				</div>
+				<div class="pic_place" id="pic_closed">
+					<svg class="pic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><defs><style>.cls-1,.cls-2{fill:#fff;fill-rule:evenodd;}.cls-1{opacity:0.2;}</style></defs><title>minimize</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M22,0A22,22,0,1,1,0,22,22,22,0,0,1,22,0Z"/><path class="cls-1" d="M22,6.19A15.81,15.81,0,1,1,6.19,22,15.81,15.81,0,0,1,22,6.19Z"/><path class="cls-2" d="M14,20H30a2,2,0,0,1,0,4H14a2,2,0,0,1,0-4Z"/></g></g></svg>
+				</div>
+					<!-- <iframe src="https://lottiefiles.com/i/PMYj9R" frameborder="0" allowfullscreen scrolling="no"></iframe> -->
+
+				<div class="text_in">
+					<p>Hi</p>
+					<p>you have read 4 blogs want to subscribe?</p>
+				</div>
+				<button id="open_form">Sure</button>
+				<button id="min_hexagon">✖</button>
+				<div class="form">
+					<h2>Subscribe to our Newsletter</h2>
+					<form id="mktoForm_1416"></form>
+					<!--<form action="#">
+						<input type="text" placeholder="First Name">
+						<input type="text" placeholder="Last Name">
+						<input type="email" placeholder="E-Mail">
+						<input type="submit" value="Subscribe">
+					</form>-->
+					<script>MktoForms2.loadForm("https://app-lon05.marketo.com", "762-ZOQ-318", 1416);</script>
+					<div class="disclamer">
+						<span>Powerd By</span>
+						<img src="img/logo.svg" alt="">
+					</div>
+				</div>
+			</div>
+		</aside>
+	</footer>
+</body>
+
+	<script>
+$("#hexagon").ready(function() {
+			$("#min_hexagon").click(function() {
+				event.stopPropagation();
+				$("#hexagon").addClass("minimized");
+				$("#pic_opened").addClass("minimized");
+		  		$(".text_in").fadeOut(300);
+  				$("#open_form").fadeOut(300);
+  				$("#min_hexagon").fadeOut(300);
+			})
+			$("#open_form").click(function(){
+				$("#hidden_bg").addClass("hidden");
+				$("#pic_opened").removeClass("minimized");
+				$("#hexagon").removeClass("minimized");
+				$("#hexagon").addClass("opened_form_popup");
+				setTimeout(function() {
+					$(".form").fadeIn(300);
+					$("#pic_opened").hide();
+					$("#pic_closed").show();
+				}, 300);
+				$(".text_in").fadeOut(300);
+  				$("#open_form").fadeOut(300);
+  				$("#min_hexagon").fadeOut(300);
+			})	
+		});
+		$("#hexagon").click(function(event) {
+			event.stopPropagation();
+			if ($(this).hasClass("minimized")) {
+				$("#hidden_bg").addClass("hidden");
+				$("#pic_opened").removeClass("minimized");
+				$(this).removeClass("minimized");
+				$(this).addClass("opened_form_popup");
+				setTimeout(function() {
+					$(".form").fadeIn(300);
+					$("#pic_opened").hide();
+					$("#pic_closed").show();
+				}, 300);
+			}
+		})
+
+		$("#hexagon").hover(
+			function() {
+				if ($(this).hasClass("minimized")) {
+					$("#hexagon")
+						// .delay(300)
+						.addClass('hover')
+						// setTimeout(function() {
+						// 	$(".hover_text").fadeIn(300);
+						// }, 500);
+				}
+			},
+			function() {
+				if ($(this).hasClass("minimized")) {
+					$("#hexagon").delay(300).removeClass("hover");
+					$(".hover_text").fadeOut(100);
+					// $(".hover_text").delay(300).fadeOut(200);
+				}
+			}
+		);
+
+		$("#pic_closed").click(function(event) {
+			event.stopPropagation();
+			if (!($("#hexagon").hasClass("minimized"))) {
+				$("#hexagon").removeClass("hover");
+				$("#hidden_bg").removeClass("hidden");
+				// $("#pic_closed").click();
+				$("#hexagon").addClass("minimized");
+				$("#hexagon").removeClass("opened_form_popup");
+				$(".form").fadeOut(300);
+				$("#pic_opened").addClass("minimized");
+				setTimeout(function() {
+					$("#pic_closed").hide();
+					$("#pic_opened").show();
+				}, 300);
+			}
+		})
+	</script>
+
+</html>

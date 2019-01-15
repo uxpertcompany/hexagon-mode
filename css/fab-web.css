@@ -1,0 +1,234 @@
+@font-face {
+  font-family: Lato;
+  src: url(../fonts/Lato-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: Lato-Bold;
+  src: url(../fonts/Lato-Bold.ttf);
+  font-weight: 700;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: lato;
+}
+h1, h2, h3, p {
+    margin: 0;
+}
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: unset;
+  cursor: pointer;
+}
+aside {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+    filter: drop-shadow(0px -3px 10px rgba(0, 0, 0, 0.4));
+}
+aside .hexagon {
+    position: absolute;
+    right: 2%;
+    top: 10%;
+    height: 257px;
+    width: 227px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    transition: all .5s ease-in-out;
+    z-index: 1;
+}
+aside .hexagon:after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    height: 257px;
+    width: 227px;
+    z-index: -1;
+    -webkit-clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    background-image: linear-gradient(rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+    transition: all .5s ease-in-out;
+}
+aside .hover_text {
+    display: none;
+    top: 140px;
+    position: absolute;
+    width: 200px;
+    text-align: center;
+    font-family: Lato-bold;
+    font-size: 1.6rem;
+    z-index: 2;
+    transform: rotate(-90deg);
+    opacity: 0;
+}
+aside > .hexagon .pic_place {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 7%;
+    transition: top .5s ease-in-out;
+    z-index: 1;
+}
+aside > .hexagon  .pic {
+    height: 34px;
+    width: 34px;
+}
+aside > .hexagon .pic_place.minimized {
+    top: 30%;
+}
+aside > .hexagon  #pic_closed {
+    display: none;
+    cursor: pointer;
+}
+aside > .hexagon > .text_in {
+    max-width: 70%;
+    text-align: center;
+    margin-top: 2rem;
+}
+aside > .hexagon > button {
+    color: #fff;
+}
+aside > .hexagon > button#open_form {
+    height: 36px;
+    width: 80px;
+    background: #000;
+    margin: 1rem 0;
+}
+aside > .hexagon .form {
+    display: none;
+    text-align: center;
+}
+
+aside .hexagon.minimized {
+    height: 81px;
+    width: 71px;
+    cursor: pointer;
+}
+aside .hexagon.minimized:after {
+    height: 81px;
+    width: 71px;
+}
+
+aside .hexagon.minimized.hover {
+    flex-direction: row;
+    transform: rotate(90deg);
+}
+@keyframes expose-subscribe {
+    from {  }
+    to {
+        width: 71px;
+        height: 280px;
+        -webkit-clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+        clip-path: polygon(50% 0, 100% 10%, 100% 90%, 50% 100%, 0 90%, 0 10%);
+    }
+}
+aside .hexagon.minimized.hover > .pic_place {
+    position: initial;
+}
+aside .hexagon.minimized.hover:after {
+    animation: expose-subscribe .5s forwards;
+    animation-delay: 0.5s;
+    animation-direction: normal;
+}
+aside .hexagon.minimized.hover > .hover_text {
+    display: block;
+    animation: opacity-text 02s forwards;
+    animation-delay: .5s;
+}
+@keyframes opacity-text {
+  from {  }
+  to {opacity: 1;}
+}
+
+/*popup hexagon form*/
+aside > #hidden_bg.hidden {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+aside .hexagon.opened_form_popup {
+    height: 565px;
+    width: 500px;
+    right: 35%;
+    top: 20%;
+    z-index: 1;
+}
+aside .hexagon.opened_form_popup:after {
+    height: 565px;
+    width: 500px;
+}
+ 
+aside .form h2 {
+    margin: auto;
+    font-size: 35px;
+    width: 60%;
+}
+aside .form form {
+    margin: 1rem 0 2rem;
+
+    /*new form of widget*/
+
+    display: block;
+    max-height: 240px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: lato !important;
+
+    /*shadow gradient game*/
+
+    background: /* Shadow covers */ linear-gradient(rgba(40, 105, 204, 1) 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), rgba(61, 95, 242, 1) 70%) 0 100%, /* Shadows */ radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+}
+aside .form form::-webkit-scrollbar {
+    width: 4px;
+}
+aside .form form::-webkit-scrollbar-thumb {
+    background: rgba(133, 159, 229, 1);
+}
+aside form input {
+    font-family: lato;
+    height: 2.7rem;
+    width: 85%;
+    border: none;
+    font-size: 1.3rem;
+    padding-left: 2%;
+    margin: 0.7rem auto;
+    border-radius: 2px;
+}
+aside form input::placeholder, aside form textarea::placeholder {
+    color: rgba(0, 0, 0, 1);
+}
+/*aside form input:focus {
+    color: rgba(63, 105, 230, 1)
+}*/
+aside form input:focus::-webkit-input-placeholder, aside form textarea:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+aside form input[type="submit"] {
+    width: 30%;
+    font-size: 15px;
+    background: #000;
+    color: #fff;
+}

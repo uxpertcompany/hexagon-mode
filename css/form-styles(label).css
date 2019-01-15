@@ -1,0 +1,126 @@
+aside > .hexagon .form {
+	width: 80%;
+	position: relative;
+}
+.mktoFormRow {
+	width: 100%;
+}
+.mktoFormRow:first-of-type {
+	display: none !important;
+}
+/*.mktoFormRow:last-of-type {
+	height: 50px;
+}*/
+.mktoForm .mktoFormRow .mktoFieldDescriptor {
+	margin-bottom: 20px !important;
+}
+/*.form .mktoForm .mktoFormRow .mktoFieldDescriptor::nth-of-type(2) {
+	margin-bottom: 0 !important;
+}*/
+.mktoForm .mktoFormRow .mktoRequiredField {
+	display: flex;
+	align-items: center;
+}
+.mktoForm .mktoFormRow .mktoFieldWrap > label {
+	font-size: 0;
+	width: 11px !important;
+	padding-top: 11px;
+}
+.mktoForm .mktoFormRow .mktoFieldWrap > label > .mktoAsterix {
+	font-size: 26px;
+	color: #fff;
+	font-weight: 400; 
+}
+.form #mktoForm_1416 input[type="tel"], .form #mktoForm_1416 input[type="email"], .form #mktoForm_1416 input[type="text"], .form #mktoForm_1416 select {
+	height: 40px !important;
+	padding-left: 1rem;
+	margin-left: .5rem;
+}
+.form #mktoForm_1416 .mktoFormRow select {
+	padding-left: 0.7rem;
+	border-radius: 2px;
+}
+.form #mktoForm_1416 .mktoFormRow textarea {
+	padding-left: 1rem;
+	border-radius: 2px;
+}
+.mktoForm > .mktoFormRow > .mktoFormCol:nth-of-type(2) {
+	display: none;
+}
+.mktoForm textarea.mktoField {
+	margin-left: .5rem !important;
+}
+label[for="Consent_to_Privacy_Policy__c"] {
+	display: none;		
+}
+.mktoForm .mktoRadioList > label, .mktoForm .mktoCheckboxList > label {
+	color: rgba(165, 196, 252, 1);
+	margin-left: 1rem !important;
+	font-family: lato;
+	padding-bottom: 0;
+}
+.mktoForm .mktoRadioList > label a, .mktoForm .mktoCheckboxList > label a {
+	color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    font-family: lato;
+}
+.form #mktoForm_1416 .mktoButtonRow {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+}
+.mktoButtonRow > .mktoButtonWrap.mktoSimple {
+    display: flex;
+    justify-content: center;
+    margin-left: 0 !important;
+    padding-top: 15px;
+}
+.mktoForm .mktoCheckboxList label::before, .mktoForm .mktoRadioList label::before {
+	width: 25px !important;
+    height: 25px !important;
+    border: none !important;
+    background-color: rgba(255, 255, 255, 1) !important;
+    border-radius: 2px !important;
+    cursor: pointer;
+}
+.mktoForm .mktoCheckboxList input:checked + label::before, .mktoForm .mktoRadioList input:checked + label::before {
+	content: "✔";
+    color: rgba(66, 110, 215, 1);
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.mktoForm .mktoButtonRow .mktoButtonWrap.mktoSimple .mktoButton {
+    background: none;
+    border: none;
+    height: 50px;
+    width: 139px;
+	background-color: rgba(35, 35, 35, 1);
+    border-radius: 2px;
+    padding: 0;
+}
+.mktoForm .mktoButtonRow .mktoButtonWrap.mktoSimple .mktoButton:hover {
+	background-color: rgba(85, 85, 85, 1);
+	border: none;
+}
+.mktoForm .mktoButtonRow .mktoButtonWrap.mktoSimple .mktoButton:active {
+	background-color: rgba(0, 0, 0, .5);
+	background-image: none;
+	outline: none;
+}
+.form > .disclamer {
+	display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    font-size: 11px;
+    bottom: -55px;
+}
