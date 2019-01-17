@@ -178,10 +178,12 @@ aside .hexagon.opened_form_popup:after {
     width: 500px;
 }
  
-aside .form h2 {
-    margin: auto;
+aside h2 {
+    margin: 0 auto;
     font-size: 35px;
     width: 60%;
+    text-align: center;
+    display: none;
 }
 aside .form form {
     margin: 1rem 0 2rem;
@@ -195,40 +197,52 @@ aside .form form {
     font-family: lato !important;
 
     /*shadow gradient game*/
-
-    background: /* Shadow covers */ linear-gradient(rgba(40, 105, 204, 1) 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), rgba(61, 95, 242, 1) 70%) 0 100%, /* Shadows */ radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+/*
+    background:  linear-gradient(rgba(40, 105, 204, 1) 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), rgba(61, 95, 242, 1) 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
     background-repeat: no-repeat;
-    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-    background-attachment: local, local, scroll, scroll;
+    background-size: 100% 40px, 100% 40px, 100% 30px, 100% 30px;
+    background-attachment: local, local, scroll, scroll;*/
 }
-aside .form form::-webkit-scrollbar {
-    width: 4px;
+.form > .disclamer {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    font-size: 9px;
+    /*bottom: -56px;*/
+    height: 80px;
+    flex-direction: column;
 }
-aside .form form::-webkit-scrollbar-thumb {
-    background: rgba(133, 159, 229, 1);
+
+
+
+
+
+
+.form {
+    width: 80%;
+    position: relative;
+    height: 260px;
 }
-aside form input {
-    font-family: lato;
-    height: 2.7rem;
-    width: 85%;
-    border: none;
-    font-size: 1.3rem;
-    padding-left: 2%;
-    margin: 0.7rem auto;
-    border-radius: 2px;
+
+.form:after, .form:before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    transition: all .5s ease-in-out;
+    left: 0;
 }
-aside form input::placeholder, aside form textarea::placeholder {
-    color: rgba(0, 0, 0, 1);
+
+.form:before {
+  background: radial-gradient(farthest-side at 50% 0, rgba(61, 95, 242, 1), rgba(0, 0, 0, 0));
+  top: 0;
 }
-/*aside form input:focus {
-    color: rgba(63, 105, 230, 1)
-}*/
-aside form input:focus::-webkit-input-placeholder, aside form textarea:focus::-webkit-input-placeholder {
-    opacity: 0;
+.form:after {
+  background: radial-gradient(farthest-side at 50% 100%, rgba(61, 95, 242, 1), rgba(0, 0, 0, 0));
+  bottom: 0;
 }
-aside form input[type="submit"] {
-    width: 30%;
-    font-size: 15px;
-    background: #000;
-    color: #fff;
+.bottom.form:after, .top.form:before {
+  height: 50px;
 }

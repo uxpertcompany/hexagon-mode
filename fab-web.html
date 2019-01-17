@@ -153,10 +153,6 @@
  * Styling for the checked state of checkboxes and radio buttons. 
  */  
   
-.mktoForm .mktoCheckboxList input:checked + label::before,  
-.mktoForm .mktoRadioList input:checked + label::before {  
-  background-color: red;  
-}  
   
 /** 
  * Style radio buttons slightly differently. 
@@ -264,8 +260,8 @@ function moveCheckboxesToTheLeft(form) {
 				</div>
 				<button id="open_form">Sure</button>
 				<button id="min_hexagon">✖</button>
-				<div class="form">
 					<h2>Subscribe to our Newsletter</h2>
+				<div class="form">
 					<form id="mktoForm_1416"></form>
 					<!--<form action="#">
 						<input type="text" placeholder="First Name">
@@ -301,6 +297,7 @@ $("#hexagon").ready(function() {
 				$("#hexagon").addClass("opened_form_popup");
 				setTimeout(function() {
 					$(".form").fadeIn(300);
+					$("h2").fadeIn(300);
 					$("#pic_opened").hide();
 					$("#pic_closed").show();
 				}, 300);
@@ -318,6 +315,7 @@ $("#hexagon").ready(function() {
 				$(this).addClass("opened_form_popup");
 				setTimeout(function() {
 					$(".form").fadeIn(300);
+					$("h2").fadeIn(300);
 					$("#pic_opened").hide();
 					$("#pic_closed").show();
 				}, 300);
@@ -349,10 +347,10 @@ $("#hexagon").ready(function() {
 			if (!($("#hexagon").hasClass("minimized"))) {
 				$("#hexagon").removeClass("hover");
 				$("#hidden_bg").removeClass("hidden");
-				// $("#pic_closed").click();
 				$("#hexagon").addClass("minimized");
 				$("#hexagon").removeClass("opened_form_popup");
 				$(".form").fadeOut(300);
+				$("h2").fadeOut(300);
 				$("#pic_opened").addClass("minimized");
 				setTimeout(function() {
 					$("#pic_closed").hide();
@@ -360,6 +358,24 @@ $("#hexagon").ready(function() {
 				}, 300);
 			}
 		})
+	</script>
+
+
+	<script>
+	var pane = $("form");
+	var outer = $(".form");
+	pane.scroll(function() {
+    var ind, scroll;
+    scroll = pane.scrollTop();
+    if (scroll < 10) {
+      outer.addClass('top');
+    } else if (scroll >= 10 && scroll < pane.height() - 10) {
+      outer.removeClass('top').removeClass('bottom');
+    } else {
+      outer.addClass('bottom');
+    }
+    // return ind = Math.round(((25 - 2) / (pane.height())) * scroll);
+  });
 	</script>
 
 </html>
