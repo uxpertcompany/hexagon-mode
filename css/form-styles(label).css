@@ -12,7 +12,7 @@ aside > .hexagon .form {
 	height: 50px;
 }*/
 .mktoForm .mktoFormRow .mktoFieldDescriptor {
-	margin-top: 20px !important;
+	margin-top: 15px !important;
 	margin-bottom: 0 !important;
 }
 .mktoForm .mktoFormRow:nth-of-type(2) .mktoFieldDescriptor {
@@ -80,7 +80,7 @@ label[for="Consent_to_Privacy_Policy__c"] {
     display: flex;
     justify-content: center;
     margin-left: 0 !important;
-    padding-top: 15px;
+    padding-top: 25px;
     height: 0;
 }
 .mktoForm .mktoCheckboxList label::before, .mktoForm .mktoRadioList label::before {
@@ -120,7 +120,6 @@ label[for="Consent_to_Privacy_Policy__c"] {
 }
 aside form::-webkit-scrollbar {
     width: 4px;
-
 }
 aside form::-webkit-scrollbar-thumb {
     background: rgba(133, 159, 229, 1);

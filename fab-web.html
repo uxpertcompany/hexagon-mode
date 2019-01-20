@@ -361,20 +361,22 @@ $("#hexagon").ready(function() {
 	</script>
 
 
-	<script>
+<script>
 	var pane = $("form");
 	var outer = $(".form");
+  	outer.addClass('bottom');
 	pane.scroll(function() {
     var ind, scroll;
     scroll = pane.scrollTop();
-    if (scroll < 10) {
-      outer.addClass('top');
-    } else if (scroll >= 10 && scroll < pane.height() - 10) {
-      outer.removeClass('top').removeClass('bottom');
-    } else {
-      outer.addClass('bottom');
-    }
-    // return ind = Math.round(((25 - 2) / (pane.height())) * scroll);
+if (scroll >= 10 && scroll <= pane.height() - 10) {
+  outer.addClass('top');
+} else if (scroll === 0) {
+	outer.removeClass('top');
+} else if (scroll >= 300 && pane.height()) {
+	outer.removeClass('bottom')	
+} else {
+  outer.addClass('bottom');
+}
   });
 	</script>
 
