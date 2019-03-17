@@ -1,0 +1,249 @@
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  outline: unset;
+  cursor: pointer;
+}
+/*aside .disclamer {
+  display: none;
+}*/
+aside > #hidden_bg.hidden {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s ease-out;
+}
+    /*<!-- smart_mob_screen -->*/
+aside .smart_mob_text {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: end;
+  height: 130px;
+  justify-content: flex-start;
+  background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 1);
+  text-align: left;
+  line-height: 1.8rem;
+  bottom: 0;
+  transition: bottom 1s ease-in-out;
+}
+aside .smart_mob_text.list_ver {
+  position: unset;
+  padding-bottom: 3rem;
+  height: auto;
+  z-index: 1;
+}
+aside #popup_smart_mob_text.closed {
+  bottom: -150px;
+  transition: bottom .4s ease-in-out;
+}
+aside .smart_mob_text > .close_fab {
+  align-self: flex-end;
+  margin-right: 2rem;
+  border-bottom: 2px solid;
+  width: 13px;
+  padding-top: 2rem;
+}
+aside .smart_mob_text > .cont_fab {
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+aside .smart_mob_text > .cont_fab > button {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 1);
+  background: #000;
+  width: 6.1rem;
+  height: 3.1rem;
+  font-size: 1.1rem;
+  align-self: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+    /*<!-- form smart text popup -->*/
+aside > .form_cont {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  flex-direction: column;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 1);
+  bottom: 0;
+  transition: bottom .5s ease-in-out;
+  justify-content: flex-start;
+}
+/*  aside > .form_cont > .head_padding_part {
+    width: 100%;
+    height: 1rem;
+    background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+  }*/
+  aside > .form_cont.closed {
+    bottom: -800px;
+  }
+  aside > .form_cont > .triangle_head {
+    background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+    flex-direction: column;
+    width: 100%;
+    height: 120px;
+    -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    justify-content: center;
+  }
+  aside > .form_cont > .triangle_head > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    width: 42px;
+    background: rgba(245, 245, 245, .2);
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom: 1.5rem;
+    -webkit-appearance: none;
+  }
+  aside > .form_cont > .triangle_head > div > .close_circ_out {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    background: rgba(245, 245, 245, .2);
+    border-radius: 100%; 
+  }
+  aside > .form_cont > .triangle_head > div > .close_circ_out > .close_circ_in {
+    background: #fff;
+    height: 4px;
+    width: 1.5rem;
+    border-radius: 4px;
+  }
+  aside > .form_cont > .form {
+    position: relative;
+    align-items: baseline;
+    background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+    width: 100%;
+    padding-top: 0.8rem;
+  }
+  aside > .form_cont form {
+    display: flex;
+    flex-wrap: wrap;
+    background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+    justify-content: center;
+    margin: 0 1rem 7rem 1rem;
+    padding: 0 1rem;
+    overflow-y: auto;
+    max-height: 65vh;
+    overflow-x: hidden;
+  }
+  aside > .form_cont h3 {
+    padding: 0 0 .9rem;
+    font-size: 1.6rem;
+    color: rgba(245, 245, 245, 1);
+  }
+  aside > .form_cont form > input {
+    font-family: lato;
+    height: 2.7rem;
+    width: 85%;
+    border: none;
+    font-size: 1.3rem;
+    padding-left: 2%;
+    margin: 0.7rem auto;
+   }
+  aside > .form_cont form > input[type="submit"] {
+    width: 87%;
+    font-size: 15px;
+    height: 35px;
+    background: #000;
+    color: #fff;
+    -webkit-appearance: none;
+  }
+  aside .disclamer.opened {
+    bottom: 0 !important;
+  }
+  aside #slide_mob_disclamer {
+    display: flex;
+    bottom: -50%;
+    transition: all .5s ease-in-out;
+  }
+  aside #disclamer_to_form {
+    display: flex;
+    height: 3rem;
+    font-size: 1.4rem;
+    bottom: -4rem;
+    transition: all .5s ease-in-out;
+    right: 0;
+    opacity: 1;
+  }
+  aside #disclamer_to_form.moved {
+    right: 101%;
+    opacity: 0;
+  }
+  aside.moved {
+    padding-bottom: 4rem;
+  }
+/*marketo mob styles*/
+#mktoForm_1416 .mktoFormRow .mktoFieldDescriptor select {
+  width: 95%!important;
+  }
+/*.mktoForm .mktoFormRow:nth-of-type(2) .mktoFieldDescriptor {
+  margin-top: 0!important;
+}*/
+.form .mktoButtonRow > .mktoButtonWrap.mktoSimple {
+  height: auto;
+  padding: 0;
+}
+
+  /*gradient games shadow*/
+
+.form:after, .form:before {
+  content: '';
+  position: absolute;
+  width: 86%;
+  z-index: 10;
+  transition: all .5s ease-in-out;
+  left: 0;
+  pointer-events: none;
+  margin-left: 7.5%;
+}
+.form:before {
+  background: linear-gradient(rgba(0, 0, 0, .25), rgba(0, 0, 0, 0));
+  top: 0.75rem;
+}
+.form:after {
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+  bottom: 6.9rem;
+}
+.bottom.form:after, .top.form:before {
+  height: 20px;
+}
+.form_cont .mktoForm .mktoFormRow .mktoFieldDescriptor {
+  margin-top: 20px !important;
+}
+
+/*sticky mobile button*/
+
+.form_cont .form #mktoForm_1416 .mktoButtonRow {
+  height: 63px;
+  background-image: linear-gradient(90deg, rgba(40, 105, 204, 1) 0%, rgba(61, 95, 242, 1) 100%);
+  bottom: 2.2rem;
+  width: 101%;
+}
+.mktoForm .mktoRadioList > label, .mktoForm .mktoCheckboxList > label {
+      margin-left: 1.2rem !important;
+}
+@media all and (max-width: 400px) {
+  .form:after{
+    bottom: 7.9rem;
+  }
+}

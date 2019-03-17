@@ -50,7 +50,7 @@
   aside .hexagon:after {
       content: '';
       position: absolute;
-      top: 0;
+      top: 0px;
       height: 257px;
       width: 257px;
       z-index: -1;
@@ -106,7 +106,7 @@
   aside .hover_text2 b:first-child {
       content: " ";
       transform: rotate(45deg);
-      transform-origin: 0 0;
+      transform-origin: 0px 0px;
       background-color: #ffa700;
       width: 65px;
       height: 65px;
@@ -124,11 +124,11 @@
   aside .hover_text2 b:last-child {
       content: " ";
       transform: rotate(45deg);
-      transform-origin: 0 0;
+      transform-origin: 0px 0px;
       background-color: #ff2500;
       width: 65px;
       height: 65px;
-      top: -6px;
+      top: -11px;
       left: 40px;
       position: absolute;
       border-radius: 0.9rem;

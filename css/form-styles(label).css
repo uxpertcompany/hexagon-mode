@@ -12,12 +12,11 @@ aside > .hexagon .form {
 	height: 50px;
 }*/
 .mktoForm .mktoFormRow .mktoFieldDescriptor {
-	margin-top: 15px !important;
+	margin-bottom: 20px !important;
+}
+/*.form .mktoForm .mktoFormRow .mktoFieldDescriptor::nth-of-type(2) {
 	margin-bottom: 0 !important;
-}
-.mktoForm .mktoFormRow:nth-of-type(2) .mktoFieldDescriptor {
-	margin-top: 0 !important;
-}
+}*/
 .mktoForm .mktoFormRow .mktoRequiredField {
 	display: flex;
 	align-items: center;
@@ -32,19 +31,18 @@ aside > .hexagon .form {
 	color: #fff;
 	font-weight: 400; 
 }
-#mktoForm_1416 .mktoFormRow .mktoFieldDescriptor input[type="tel"], #mktoForm_1416 .mktoFormRow .mktoFieldDescriptor input[type="email"], #mktoForm_1416 .mktoFormRow .mktoFieldDescriptor input[type="text"], #mktoForm_1416 .mktoFormRow .mktoFieldDescriptor select {
+.form #mktoForm_1416 input[type="tel"], .form #mktoForm_1416 input[type="email"], .form #mktoForm_1416 input[type="text"], .form #mktoForm_1416 select {
 	height: 40px !important;
 	padding-left: 1rem;
 	margin-left: .5rem;
 }
-#mktoForm_1416 .mktoFormRow .mktoFieldDescriptor select {
+.form #mktoForm_1416 .mktoFormRow select {
 	padding-left: 0.7rem;
 	border-radius: 2px;
 }
- #mktoForm_1416 .mktoFormRow textarea {
+.form #mktoForm_1416 .mktoFormRow textarea {
 	padding-left: 1rem;
 	border-radius: 2px;
-	height: 90px;
 }
 .mktoForm > .mktoFormRow > .mktoFormCol:nth-of-type(2) {
 	display: none;
@@ -80,8 +78,7 @@ label[for="Consent_to_Privacy_Policy__c"] {
     display: flex;
     justify-content: center;
     margin-left: 0 !important;
-    padding-top: 25px;
-    height: 0;
+    padding-top: 15px;
 }
 .mktoForm .mktoCheckboxList label::before, .mktoForm .mktoRadioList label::before {
 	width: 25px !important;
@@ -103,7 +100,7 @@ label[for="Consent_to_Privacy_Policy__c"] {
 .mktoForm .mktoButtonRow .mktoButtonWrap.mktoSimple .mktoButton {
     background: none;
     border: none;
-    height: 40px;
+    height: 50px;
     width: 139px;
 	background-color: rgba(35, 35, 35, 1);
     border-radius: 2px;
@@ -118,32 +115,12 @@ label[for="Consent_to_Privacy_Policy__c"] {
 	background-image: none;
 	outline: none;
 }
-aside form::-webkit-scrollbar {
-    width: 4px;
+.form > .disclamer {
+	display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    align-items: center;
+    font-size: 11px;
+    bottom: -55px;
 }
-aside form::-webkit-scrollbar-thumb {
-    background: rgba(133, 159, 229, 1);
-}
-aside form input {
-    font-family: lato;
-    height: 2.7rem;
-    width: 85%;
-    border: none;
-    font-size: 1.3rem;
-    padding-left: 2%;
-    margin: 0.7rem auto;
-    border-radius: 2px;
-}
-aside form input[type="submit"] {
-    width: 30%;
-    font-size: 15px;
-    background: #000;
-    color: #fff;
-}
-  aside form input::placeholder, aside form textarea::placeholder {
-    color: rgba(0, 0, 0, 1);
-    font-family: lato;
-  }
-  aside form input:focus::-webkit-input-placeholder, aside form textarea:focus::-webkit-input-placeholder {
-    opacity: 0;
-  }

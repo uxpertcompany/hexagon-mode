@@ -3,256 +3,105 @@
 <head>
 	<link href="css/fab-web.css" rel="stylesheet" type="text/css">
 	<link href="css/form-styles(label).css" rel="stylesheet" type="text/css">
+	<link href="css/new-style.css" rel="stylesheet" type="text/css">
 	<!-- <link href="css/squre-mode.css" rel="stylesheet" type="text/css"> -->
 	<meta name="viewport" content="width=device-width">
 	<meta charset="UTF-8">
 
 	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="https://cliclap-production-cors-proxy.azurewebsites.net/app-lon05.marketo.com/js/forms2/js/forms2.min.js"></script>
 	<title>CliClap Test</title>
 </head>
 <body>
 	<header>
-	<style>
-	/*------------------------------------*\ 
-  #BASE-STYLES 
-\*------------------------------------*/  
-  
-/** 
- * Just in case this is not already set on the page, we have to change the 
- * default box sizing for Marketo Forms to have a custom gutter width. 
- */  
-  
-.mktoForm *,  
-.mktoForm *::before,  
-.mktoForm *::after {  
-  box-sizing: border-box;  
-}  
-  
-/** 
- * Set all relevant form elements to have 100% width 
- */  
-  
-.mktoForm,  
-.mktoForm .mktoField,  
-.mktoForm .mktoHtmlText,  
-.mktoForm .mktoFormCol,  
-.mktoForm .mktoFieldWrap,  
-.mktoForm .mktoCheckboxList,  
-.mktoForm .mktoRadioList {  
-  width: 100% !important;  
-}  
-  
-/** 
- * Hide default gutter and offset elements in Marketo Forms 
- */  
-  
-.mktoForm .mktoOffset,  
-.mktoForm .mktoGutter {  
-  display: none;  
-}  
-  
-/** 
- * Vertical form row spacing, optional 
- */  
-  
-.mktoForm .mktoFieldDescriptor {  
-  margin-bottom: 10px;  
-}  
-  
-/** 
- * This is a progressive enhancement for all browsers that support 
- * flexbox (IE10+). Other browser will just show the form fields in 
- * one column opposed to multiple columns.  
- * 
- * 1. Breakpoint: One column -> Multiple columns 
- * 2. Column gutter width 
- */  
-  
-@media (min-width: 740px) { /* [1] */  
-  .mktoForm .mktoFormRow {  
-    display: -webkit-box;  
-    display: -ms-flexbox;  
-    display: flex;  
-    margin-right: -10px; /* [2] */  
-  }  
-  
-  .mktoForm .mktoFormRow .mktoFormCol {  
-    min-width: 0;  
-    padding-right: 10px; /* [2] */  
-  }  
-}  
-  
-/* 
- * As we removed all default styling, we have to show the asterix and  
- * checkboxes/radio button in the same line than labels 
- */  
-  
-.mktoForm .mktoAsterix,  
-.mktoForm .mktoCheckboxList input,  
-.mktoForm .mktoRadioList input {  
-  display: inline-block;  
-  width: auto !important;  
-}  
-  
-/** 
- * As textboxes are always 100% wide, there's no need to resize them horizontally 
- */  
-  
-.mktoForm textarea.mktoField {  
-  resize: vertical !important; /* [1] */  
-}  
-  
-  
-  
-  
-/*------------------------------------*\ 
-  #CUSTOM-STYLES 
-\*------------------------------------*/  
-  
-/** 
- * Visually  hide the input elements by moving them outside the visible area. 
- */  
-  
-.mktoForm .mktoCheckboxList > input,  
-.mktoForm .mktoRadioList > input {  
-  position: absolute;  
-  left: -9999px;  
-}  
-  
-/** 
- * 1. Fake checkboxes/radio buttons will be positioned relatively to this element. 
- * 2. Adjust padding to your needs. Please note that the left padding needs to be 
- *    higher to leave space for the custom checkbox. 
- */  
-  
-.mktoForm .mktoCheckboxList > label,  
-.mktoForm .mktoRadioList > label {  
-  position: relative; /* [1] */  
-  padding: 0 0 5px 33px; /* [2] */  
-}  
-  
-/** 
- * Fake checkboxes to allow custom styling. These styles are for unchecked checkboxes  
- * or radio button. 
- */  
-  
-.mktoForm .mktoCheckboxList label::before,  
-.mktoForm .mktoRadioList label::before {  
-  position: absolute;  
-  top: 0;  
-  left: 0;  
-  width: 18px;  
-  height: 18px;  
-  background: lightgray;  
-  border: 2px solid lightgray;  
-  content: "";  
-}  
-  
-/** 
- * Styling for the checked state of checkboxes and radio buttons. 
- */  
-  
-  
-/** 
- * Style radio buttons slightly differently. 
- */  
-  
-.mktoForm .mktoRadioList label::before {  
-  border-radius: 50%;  
-}  
 
-.mktoForm .mktoFormRow .mktoFormCol{
-min-width:auto;
-}
-	</style>
-	<script>
-	MktoForms2.whenRendered(function(form) {  
-  var formEl = form.getFormElem()[0];  
-  destyleMktoForm(form);  
-  moveCheckboxesToTheLeft(form);  
-  formEl.setAttribute("data-styles-ready", "true");  
-});  
-  
-/* 
- * @author Sanford Whiteman 
- * @version v1.103 
- * @license MIT License: This license must appear with all reproductions of this software. 
- * 
- * Create a completely barebones, user-styles-only Marketo form 
- * by removing inline STYLE attributes and disabling STYLE and LINK elements 
- */  
-function destyleMktoForm(form) {  
-  var formEl = form.getFormElem()[0];  
-  var arrayFrom = Function.prototype.call.bind(Array.prototype.slice);  
-  
-  // remove element styles from <form> and children  
-  var styledEls = arrayFrom(formEl.querySelectorAll("[style]")).concat(formEl);  
-  styledEls.forEach(function(el) {  
-    el.removeAttribute("style");  
-  });  
-  
-  // disable remote stylesheets and local <style>s  
-  var styleSheets = arrayFrom(document.styleSheets);  
-  styleSheets.forEach(function(ss) {  
-    if (  
-      [mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 ||  
-      formEl.contains(ss.ownerNode)  
-    ) {  
-      ss.disabled = true;  
-    }  
-  });  
-}  
-  
-/** 
- * By default all checkboxes and radio buttons are right aligned in 
- * Marketo Forms. This function moves these elements to the left side. 
- */  
-function moveCheckboxesToTheLeft(form) {  
-  var formEl = form.getFormElem()[0];  
-  var formRowEl = formEl.querySelectorAll(".mktoFormRow");  
-  
-  
-  for (var i = 0; i < formRowEl.length; i++) {  
-    // Get all checkboxes and radio buttons within form row  
-    var formCheckboxEl = formRowEl[i].querySelectorAll(  
-      "input[type=checkbox], input[type=radio]"  
-    );  
-    var hasOnlyOneCheckbox =   
-      formCheckboxEl !== null && formCheckboxEl.length === 1;  
-      
-    // Check if there's only one of these elements in that row to  
-    // ensure to only transform single checkbox / radio button elements  
-    if (hasOnlyOneCheckbox) {  
-      var formCheckboxLabel = formRowEl[i].querySelectorAll(  
-        "label[for=" + formCheckboxEl[0].getAttribute("name") + "],\  
-         label[for=" + formCheckboxEl[0].getAttribute("id") + "]"  
-      );  
-        
-      // Check if second label element is empty which should be the case   
-      // for all single checkbox / radio button elements  
-      if (formCheckboxLabel[1].textContent === "") {  
-        formCheckboxLabel[1].innerHTML = formCheckboxLabel[0].innerHTML;  
-        formCheckboxLabel[0].innerHTML = "";  
-      }  
-    }  
-  }  
-}  
-	</script>
+	<!--<script>-->
+	<!--MktoForms2.whenRendered(function(form) {  -->
+  <!--var formEl = form.getFormElem()[0];  -->
+  <!--destyleMktoForm(form);  -->
+  <!--moveCheckboxesToTheLeft(form);  -->
+  <!--formEl.setAttribute("data-styles-ready", "true");  -->
+<!--});  -->
+  <!---->
+<!--/* -->
+ <!--* @author Sanford Whiteman -->
+ <!--* @version v1.103 -->
+ <!--* @license MIT License: This license must appear with all reproductions of this software. -->
+ <!--* -->
+ <!--* Create a completely barebones, user-styles-only Marketo form -->
+ <!--* by removing inline STYLE attributes and disabling STYLE and LINK elements -->
+ <!--*/  -->
+<!--function destyleMktoForm(form) {  -->
+  <!--var formEl = form.getFormElem()[0];  -->
+  <!--var arrayFrom = Function.prototype.call.bind(Array.prototype.slice);  -->
+  <!---->
+  <!--// remove element styles from <form> and children  -->
+  <!--var styledEls = arrayFrom(formEl.querySelectorAll("[style]")).concat(formEl);  -->
+  <!--styledEls.forEach(function(el) {  -->
+    <!--el.removeAttribute("style");  -->
+  <!--});  -->
+  <!---->
+  <!--// disable remote stylesheets and local <style>s  -->
+  <!--var styleSheets = arrayFrom(document.styleSheets);  -->
+  <!--styleSheets.forEach(function(ss) {  -->
+    <!--if (  -->
+      <!--[mktoForms2BaseStyle, mktoForms2ThemeStyle].indexOf(ss.ownerNode) != -1 ||  -->
+      <!--formEl.contains(ss.ownerNode)  -->
+    <!--) {  -->
+      <!--ss.disabled = true;  -->
+    <!--}  -->
+  <!--});  -->
+<!--}  -->
+  <!---->
+<!--/** -->
+ <!--* By default all checkboxes and radio buttons are right aligned in -->
+ <!--* Marketo Forms. This function moves these elements to the left side. -->
+ <!--*/  -->
+<!--function moveCheckboxesToTheLeft(form) {  -->
+  <!--var formEl = form.getFormElem()[0];  -->
+  <!--var formRowEl = formEl.querySelectorAll(".mktoFormRow");  -->
+  <!---->
+  <!---->
+  <!--for (var i = 0; i < formRowEl.length; i++) {  -->
+    <!--// Get all checkboxes and radio buttons within form row  -->
+    <!--var formCheckboxEl = formRowEl[i].querySelectorAll(  -->
+      <!--"input[type=checkbox], input[type=radio]"  -->
+    <!--);  -->
+    <!--var hasOnlyOneCheckbox =   -->
+      <!--formCheckboxEl !== null && formCheckboxEl.length === 1;  -->
+      <!---->
+    <!--// Check if there's only one of these elements in that row to  -->
+    <!--// ensure to only transform single checkbox / radio button elements  -->
+    <!--if (hasOnlyOneCheckbox) {  -->
+      <!--var formCheckboxLabel = formRowEl[i].querySelectorAll(  -->
+        <!--"label[for=" + formCheckboxEl[0].getAttribute("name") + "],\  -->
+         <!--label[for=" + formCheckboxEl[0].getAttribute("id") + "]"  -->
+      <!--);  -->
+        <!---->
+      <!--// Check if second label element is empty which should be the case   -->
+      <!--// for all single checkbox / radio button elements  -->
+      <!--if (formCheckboxLabel[1].textContent === "") {  -->
+        <!--formCheckboxLabel[1].innerHTML = formCheckboxLabel[0].innerHTML;  -->
+        <!--formCheckboxLabel[0].innerHTML = "";  -->
+      <!--}  -->
+    <!--}  -->
+  <!--}  -->
+<!--}  -->
+	<!--</script>-->
 	</header>
 	<main></main>
 	<footer>
 		<aside>
 			<div id="hidden_bg"></div>
 			<div class="hexagon" id="hexagon">
-				<span class="hover_text">Subscribe Now</span>
+				<span class="hover_text"> <span>Register for a demo</span></span>
+				<span class="hover_text2"><b></b><b></b></span>
 				<div class="pic_place"	id="pic_opened">
 					<svg class="pic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><defs><style>.cls-1,.cls-2{fill:#fff;fill-rule:evenodd;}.cls-1{opacity:0.2;}</style></defs><title>Fab</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M22,0A22,22,0,1,1,0,22,22,22,0,0,1,22,0Z"/><path class="cls-2" d="M22,12.1A9.9,9.9,0,1,1,12.1,22,9.9,9.9,0,0,1,22,12.1Z"/><path class="cls-1" d="M22,6.19A15.81,15.81,0,1,1,6.19,22,15.81,15.81,0,0,1,22,6.19Z"/></g></g></svg>
 				</div>
 				<div class="pic_place" id="pic_closed">
 					<svg class="pic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44"><defs><style>.cls-1,.cls-2{fill:#fff;fill-rule:evenodd;}.cls-1{opacity:0.2;}</style></defs><title>minimize</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M22,0A22,22,0,1,1,0,22,22,22,0,0,1,22,0Z"/><path class="cls-1" d="M22,6.19A15.81,15.81,0,1,1,6.19,22,15.81,15.81,0,0,1,22,6.19Z"/><path class="cls-2" d="M14,20H30a2,2,0,0,1,0,4H14a2,2,0,0,1,0-4Z"/></g></g></svg>
 				</div>
-					<!-- <iframe src="https://lottiefiles.com/i/PMYj9R" frameborder="0" allowfullscreen scrolling="no"></iframe> -->
+				<!-- <iframe src="https://lottiefiles.com/i/PMYj9R" frameborder="0" allowfullscreen scrolling="no"></iframe> -->
 
 				<div class="text_in">
 					<p>Hi</p>
@@ -260,16 +109,105 @@ function moveCheckboxesToTheLeft(form) {
 				</div>
 				<button id="open_form">Sure</button>
 				<button id="min_hexagon">✖</button>
-					<h2>Subscribe to our Newsletter</h2>
-				<div class="form">
-					<form id="mktoForm_1416"></form>
-					<!--<form action="#">
-						<input type="text" placeholder="First Name">
-						<input type="text" placeholder="Last Name">
-						<input type="email" placeholder="E-Mail">
-						<input type="submit" value="Subscribe">
-					</form>-->
-					<script>MktoForms2.loadForm("https://app-lon05.marketo.com", "762-ZOQ-318", 1416);</script>
+				<div class="form" id="mc_embed_signup">   <!-- check if you need ID-->
+					<h2 id="mc_embed_signup_scroll">Subscribe to our Newsletter</h2>
+					<form action="https://cliclap.us11.list-manage.com/subscribe/post?u=9fbe5701dcf71991febe2619b&amp;id=0299234ee6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+							<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+							<div class="mc-field-group">
+								<label for="mce-FNAME">First Name  <span class="asterisk">*</span>
+								</label>
+								<input type="text" value="" name="FNAME" class="required" id="mce-FNAME">
+							</div>
+							<div class="mc-field-group">
+								<label for="mce-LNAME">Last Name  <span class="asterisk">*</span>
+								</label>
+								<input type="text" value="" name="LNAME" class="required" id="mce-LNAME">
+							</div>
+							<div class="mc-field-group">
+								<label for="mce-EMAIL">Work Email  <span class="asterisk">*</span>
+								</label>
+								<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+							</div>
+							<div class="mc-field-group size1of2">
+								<label for="mce-PHONE">Phone Number  <span class="asterisk">*</span>
+								</label>
+								<input type="text" name="PHONE" class="required" value="" id="mce-PHONE">
+							</div>
+							<div class="mc-field-group">
+								<label for="mce-MMERGE3">Website  <span class="asterisk">*</span>
+								</label>
+								<input type="url" value="" name="MMERGE3" class="required url" id="mce-MMERGE3">
+							</div>
+							<!--<div class="mc-field-group size1of2">-->
+								<!--<label for="mce-MMERGE6">Number shown </label>-->
+								<!--<input type="number" name="MMERGE6" class="" value="" id="mce-MMERGE6">-->
+							<!--</div>-->
+							<!--<div class="mc-field-group input-group">-->
+								<!--<strong>Radio buttons </strong>-->
+								<!--<ul><li><input type="radio" value="First Choice" name="MMERGE7" id="mce-MMERGE7-0"><label for="mce-MMERGE7-0">First Choice</label></li>-->
+									<!--<li><input type="radio" value="Second Choice" name="MMERGE7" id="mce-MMERGE7-1"><label for="mce-MMERGE7-1">Second Choice</label></li>-->
+									<!--<li><input type="radio" value="Third Choice" name="MMERGE7" id="mce-MMERGE7-2"><label for="mce-MMERGE7-2">Third Choice</label></li>-->
+								<!--</ul>-->
+							<!--</div>-->
+							<!--<div class="mc-field-group">-->
+								<!--<label for="mce-MMERGE8">Dropdown </label>-->
+								<!--<select name="MMERGE8" class="" id="mce-MMERGE8">-->
+									<!--<option value=""></option>-->
+									<!--<option value="First Choice">First Choice</option>-->
+									<!--<option value="Second Choice">Second Choice</option>-->
+									<!--<option value="Third Choice">Third Choice</option>-->
+
+								<!--</select>-->
+							<!--</div>-->
+							<!--<div class="mc-field-group size1of2">-->
+								<!--<label for="mce-MMERGE9-month">Date </label>-->
+								<!--<div class="datefield">-->
+									<!--<span class="subfield monthfield"><input class="datepart " type="text" pattern="[0-9]*" value="" placeholder="MM" size="2" maxlength="2" name="MMERGE9[month]" id="mce-MMERGE9-month"></span> /-->
+									<!--<span class="subfield dayfield"><input class="datepart " type="text" pattern="[0-9]*" value="" placeholder="DD" size="2" maxlength="2" name="MMERGE9[day]" id="mce-MMERGE9-day"></span> /-->
+									<!--<span class="subfield yearfield"><input class="datepart " type="text" pattern="[0-9]*" value="" placeholder="YYYY" size="4" maxlength="4" name="MMERGE9[year]" id="mce-MMERGE9-year"></span>-->
+									<!--<span class="small-meta nowrap">( mm / dd / yyyy )</span>-->
+								<!--</div>-->
+							<!--</div>-->
+							<div class="mc-address-group">
+								<!--<div class="mc-field-group">-->
+									<!--<label for="mce-MMERGE10-addr1">Address </label>-->
+									<!--<input type="text" value="" maxlength="70" name="MMERGE10[addr1]" id="mce-MMERGE10-addr1" class="">-->
+								<!--</div>-->
+								<!--<div class="mc-field-group">-->
+									<!--<label for="mce-MMERGE10-addr2">Address Line 2</label>-->
+									<!--<input type="text" value="" maxlength="70" name="MMERGE10[addr2]" id="mce-MMERGE10-addr2">-->
+								<!--</div>-->
+								<!--<div class="mc-field-group size1of2">-->
+									<!--<label for="mce-MMERGE10-city">City</label>-->
+									<!--<input type="text" value="" maxlength="40" name="MMERGE10[city]" id="mce-MMERGE10-city" class="">-->
+								<!--</div>-->
+								<!--<div class="mc-field-group size1of2">-->
+									<!--<label for="mce-MMERGE10-state">State/Province/Region</label>-->
+									<!--<input type="text" value="" maxlength="20" name="MMERGE10[state]" id="mce-MMERGE10-state" class="">-->
+								<!--</div>-->
+								<!--<div class="mc-field-group size1of2">-->
+									<!--<label for="mce-MMERGE10-zip">Postal / Zip Code</label>-->
+									<!--<input type="text" value="" maxlength="10" name="MMERGE10[zip]" id="mce-MMERGE10-zip" class="">-->
+								<!--</div>-->
+								<div class="mc-field-group size1of2">
+									<!--<label for="mce-MMERGE10-country">Country</label>-->
+									<select name="MMERGE10[country]" id="mce-MMERGE10-country" class=""><option selected disabled>Country</option><option value="164">USA</option><option value="286">Aaland Islands</option><option value="274">Afghanistan</option><option value="2">Albania</option><option value="3">Algeria</option><option value="178">American Samoa</option><option value="4">Andorra</option><option value="5">Angola</option><option value="176">Anguilla</option><option value="175">Antigua And Barbuda</option><option value="6">Argentina</option><option value="7">Armenia</option><option value="179">Aruba</option><option value="8">Australia</option><option value="9">Austria</option><option value="10">Azerbaijan</option><option value="11">Bahamas</option><option value="12">Bahrain</option><option value="13">Bangladesh</option><option value="14">Barbados</option><option value="15">Belarus</option><option value="16">Belgium</option><option value="17">Belize</option><option value="18">Benin</option><option value="19">Bermuda</option><option value="20">Bhutan</option><option value="21">Bolivia</option><option value="325">Bonaire, Saint Eustatius and Saba</option><option value="22">Bosnia and Herzegovina</option><option value="23">Botswana</option><option value="181">Bouvet Island</option><option value="24">Brazil</option><option value="180">Brunei Darussalam</option><option value="25">Bulgaria</option><option value="26">Burkina Faso</option><option value="27">Burundi</option><option value="28">Cambodia</option><option value="29">Cameroon</option><option value="30">Canada</option><option value="31">Cape Verde</option><option value="32">Cayman Islands</option><option value="33">Central African Republic</option><option value="34">Chad</option><option value="35">Chile</option><option value="36">China</option><option value="185">Christmas Island</option><option value="37">Colombia</option><option value="204">Comoros</option><option value="38">Congo</option><option value="183">Cook Islands</option><option value="268">Costa Rica</option><option value="275">Cote D'Ivoire</option><option value="40">Croatia</option><option value="276">Cuba</option><option value="298">Curacao</option><option value="41">Cyprus</option><option value="42">Czech Republic</option><option value="318">Democratic Republic of the Congo</option><option value="43">Denmark</option><option value="44">Djibouti</option><option value="289">Dominica</option><option value="187">Dominican Republic</option><option value="45">Ecuador</option><option value="46">Egypt</option><option value="47">El Salvador</option><option value="48">Equatorial Guinea</option><option value="49">Eritrea</option><option value="50">Estonia</option><option value="51">Ethiopia</option><option value="189">Falkland Islands</option><option value="191">Faroe Islands</option><option value="52">Fiji</option><option value="53">Finland</option><option value="54">France</option><option value="193">French Guiana</option><option value="277">French Polynesia</option><option value="56">Gabon</option><option value="57">Gambia</option><option value="58">Georgia</option><option value="59">Germany</option><option value="60">Ghana</option><option value="194">Gibraltar</option><option value="61">Greece</option><option value="195">Greenland</option><option value="192">Grenada</option><option value="196">Guadeloupe</option><option value="62">Guam</option><option value="198">Guatemala</option><option value="270">Guernsey</option><option value="63">Guinea</option><option value="65">Guyana</option><option value="200">Haiti</option><option value="66">Honduras</option><option value="67">Hong Kong</option><option value="68">Hungary</option><option value="69">Iceland</option><option value="70">India</option><option value="71">Indonesia</option><option value="278">Iran</option><option value="279">Iraq</option><option value="74">Ireland</option><option value="323">Isle of Man</option><option value="75">Israel</option><option value="76">Italy</option><option value="202">Jamaica</option><option value="78">Japan</option><option value="288">Jersey  (Channel Islands)</option><option value="79">Jordan</option><option value="80">Kazakhstan</option><option value="81">Kenya</option><option value="203">Kiribati</option><option value="82">Kuwait</option><option value="83">Kyrgyzstan</option><option value="84">Lao People's Democratic Republic</option><option value="85">Latvia</option><option value="86">Lebanon</option><option value="87">Lesotho</option><option value="88">Liberia</option><option value="281">Libya</option><option value="90">Liechtenstein</option><option value="91">Lithuania</option><option value="92">Luxembourg</option><option value="208">Macau</option><option value="93">Macedonia</option><option value="94">Madagascar</option><option value="95">Malawi</option><option value="96">Malaysia</option><option value="97">Maldives</option><option value="98">Mali</option><option value="99">Malta</option><option value="207">Marshall Islands</option><option value="210">Martinique</option><option value="100">Mauritania</option><option value="212">Mauritius</option><option value="241">Mayotte</option><option value="101">Mexico</option><option value="102">Moldova, Republic of</option><option value="103">Monaco</option><option value="104">Mongolia</option><option value="290">Montenegro</option><option value="294">Montserrat</option><option value="105">Morocco</option><option value="106">Mozambique</option><option value="242">Myanmar</option><option value="107">Namibia</option><option value="108">Nepal</option><option value="109">Netherlands</option><option value="110">Netherlands Antilles</option><option value="213">New Caledonia</option><option value="111">New Zealand</option><option value="112">Nicaragua</option><option value="113">Niger</option><option value="114">Nigeria</option><option value="217">Niue</option><option value="214">Norfolk Island</option><option value="272">North Korea</option><option value="116">Norway</option><option value="117">Oman</option><option value="118">Pakistan</option><option value="222">Palau</option><option value="282">Palestine</option><option value="119">Panama</option><option value="219">Papua New Guinea</option><option value="120">Paraguay</option><option value="121">Peru</option><option value="122">Philippines</option><option value="221">Pitcairn</option><option value="123">Poland</option><option value="124">Portugal</option><option value="126">Qatar</option><option value="315">Republic of Kosovo</option><option value="127">Reunion</option><option value="128">Romania</option><option value="129">Russia</option><option value="130">Rwanda</option><option value="205">Saint Kitts and Nevis</option><option value="206">Saint Lucia</option><option value="324">Saint Martin</option><option value="237">Saint Vincent and the Grenadines</option><option value="132">Samoa (Independent)</option><option value="227">San Marino</option><option value="255">Sao Tome and Principe</option><option value="133">Saudi Arabia</option><option value="134">Senegal</option><option value="326">Serbia</option><option value="135">Seychelles</option><option value="136">Sierra Leone</option><option value="137">Singapore</option><option value="302">Sint Maarten</option><option value="138">Slovakia</option><option value="139">Slovenia</option><option value="223">Solomon Islands</option><option value="140">Somalia</option><option value="141">South Africa</option><option value="257">South Georgia and the South Sandwich Islands</option><option value="142">South Korea</option><option value="311">South Sudan</option><option value="143">Spain</option><option value="144">Sri Lanka</option><option value="293">Sudan</option><option value="146">Suriname</option><option value="225">Svalbard and Jan Mayen Islands</option><option value="147">Swaziland</option><option value="148">Sweden</option><option value="149">Switzerland</option><option value="285">Syria</option><option value="152">Taiwan</option><option value="260">Tajikistan</option><option value="153">Tanzania</option><option value="154">Thailand</option><option value="233">Timor-Leste</option><option value="155">Togo</option><option value="232">Tonga</option><option value="234">Trinidad and Tobago</option><option value="156">Tunisia</option><option value="157">Turkey</option><option value="158">Turkmenistan</option><option value="287">Turks &amp; Caicos Islands</option><option value="159">Uganda</option><option value="161">Ukraine</option><option value="162">United Arab Emirates</option><option value="262">United Kingdom</option><option value="163">Uruguay</option><option value="165">Uzbekistan</option><option value="239">Vanuatu</option><option value="166">Vatican City State (Holy See)</option><option value="167">Venezuela</option><option value="168">Vietnam</option><option value="169">Virgin Islands (British)</option><option value="238">Virgin Islands (U.S.)</option><option value="188">Western Sahara</option><option value="170">Yemen</option><option value="173">Zambia</option><option value="174">Zimbabwe</option></select>
+								</div>
+							</div>
+							<div class="mc-field-group input-group">
+								<strong>Checkbox </strong>
+								<ul><li><input type="checkbox" value="1" name="group[18721][1]" id="mce-group[18721]-18721-0"><label for="mce-group[18721]-18721-0">Group Name 1</label></li>
+									<li><input type="checkbox" value="2" name="group[18721][2]" id="mce-group[18721]-18721-1"><label for="mce-group[18721]-18721-1">Group Name 2</label></li>
+									<li><input type="checkbox" value="4" name="group[18721][4]" id="mce-group[18721]-18721-2"><label for="mce-group[18721]-18721-2">Group Name 3</label></li>
+								</ul>
+							</div>
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none"></div>
+								<div class="response" id="mce-success-response" style="display:none"></div>
+							</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+							<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9fbe5701dcf71991febe2619b_0299234ee6" tabindex="-1" value=""></div>
+							<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+					</form>
 					<div class="disclamer">
 						<span>Powerd By</span>
 						<img src="img/logo.svg" alt="">
@@ -297,7 +235,6 @@ $("#hexagon").ready(function() {
 				$("#hexagon").addClass("opened_form_popup");
 				setTimeout(function() {
 					$(".form").fadeIn(300);
-					$("h2").fadeIn(300);
 					$("#pic_opened").hide();
 					$("#pic_closed").show();
 				}, 300);
@@ -315,7 +252,6 @@ $("#hexagon").ready(function() {
 				$(this).addClass("opened_form_popup");
 				setTimeout(function() {
 					$(".form").fadeIn(300);
-					$("h2").fadeIn(300);
 					$("#pic_opened").hide();
 					$("#pic_closed").show();
 				}, 300);
@@ -335,9 +271,9 @@ $("#hexagon").ready(function() {
 			},
 			function() {
 				if ($(this).hasClass("minimized")) {
-					$("#hexagon").delay(300).removeClass("hover");
+				$("#hexagon").delay(300).removeClass("hover");
 					$(".hover_text").fadeOut(100);
-					// $(".hover_text").delay(300).fadeOut(200);
+				    //$(".hover_text").delay(300).fadeOut(200);
 				}
 			}
 		);
@@ -347,10 +283,10 @@ $("#hexagon").ready(function() {
 			if (!($("#hexagon").hasClass("minimized"))) {
 				$("#hexagon").removeClass("hover");
 				$("#hidden_bg").removeClass("hidden");
+				// $("#pic_closed").click();
 				$("#hexagon").addClass("minimized");
 				$("#hexagon").removeClass("opened_form_popup");
 				$(".form").fadeOut(300);
-				$("h2").fadeOut(300);
 				$("#pic_opened").addClass("minimized");
 				setTimeout(function() {
 					$("#pic_closed").hide();
@@ -359,25 +295,25 @@ $("#hexagon").ready(function() {
 			}
 		})
 	</script>
+	<script>
+		$( window ).on( "load", function() {
 
+			function placeholderLabel() {
+				$("input.required").on("focusin", function (event) {
+					var $label = $(this).siblings("label");
+					console.log($label)
+					$label.addClass("hidden")
+				})
+				$("input.required").on("focusout", function (event) {
+					var $label = $(this).siblings("label");
+					if ($(event.target).val().length < 1) {
+						$label.removeClass("hidden")
+					}
+				})
+			}
 
-<script>
-	var pane = $("form");
-	var outer = $(".form");
-  	outer.addClass('bottom');
-	pane.scroll(function() {
-    var ind, scroll;
-    scroll = pane.scrollTop();
-if (scroll >= 10 && scroll <= pane.height() - 10) {
-  outer.addClass('top');
-} else if (scroll === 0) {
-	outer.removeClass('top');
-} else if (scroll >= 300 && pane.height()) {
-	outer.removeClass('bottom')	
-} else {
-  outer.addClass('bottom');
-}
-  });
+			placeholderLabel()
+		})
 	</script>
 
 </html>

@@ -1,0 +1,196 @@
+aside .form form {
+    text-align: start;
+}
+aside .form form > .indicates-required {
+    display: flex;
+    width: 92%;
+    margin: auto;
+    font-size: 18px;
+}
+aside .form form > .indicates-required > .asterisk {
+    font-size: 26px;
+    padding-right: 1.2rem;
+    margin-left: -0.4rem;
+}
+form > .mc-field-group {
+    font-family: lato;
+    position: relative;
+    height: 2.7rem;
+    width: 90%;
+    border: none;
+    font-size: 1.3rem;
+    padding-left: 2%;
+    margin: 1rem auto;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+}
+form > .mc-field-group > label {
+    position: absolute;
+    color: black;
+    pointer-events: none;
+    padding-left: 1rem;
+    font-size: 18px;
+}
+form > .mc-field-group > label.hidden {
+    display: none;
+}
+form > .mc-field-group > label .asterisk {
+    position: absolute;
+    left: -1rem;
+    top: 2px;
+    font-size: 26px;
+    color: #fff;
+}
+form > .mc-field-group > input {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    padding-left: 1rem;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 1);
+    border-radius: 2px;
+    border: none;
+}
+form  .mc-field-group input:focus ~ form .mc-field-group  input {
+    display: none;
+}
+form > .mc-field-group.input-group {
+    flex-direction: column;
+    margin-top: 2rem;
+}
+form > .mc-field-group.input-group ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    padding-top: .5rem;
+}
+form > .mc-field-group.input-group ul li {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    width: 100%;
+}
+form > .mc-field-group.input-group ul li label {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    font-weight: 400;
+    font-size: 18px;
+    opacity: 1;
+}
+form > .mc-field-group.input-group > strong {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+}
+form > .mc-field-group.input-group input[type=checkbox] {
+    width: 0;
+    position: relative;
+    right: 1rem;
+    top: 0.6rem;
+    margin: 0 2rem 0 1rem;
+    cursor: pointer;
+}
+form > .mc-address-group {
+    width: 95%;
+    margin: auto;
+}
+form > .mc-address-group .mc-field-group > select {
+    width: 95.2%;
+    height: 42px;
+    color: rgba(0, 0, 0, 1);
+    font-family: lato;
+    padding-left: 0.7rem;
+    font-size: 18px;
+    margin-left: 0.95rem;
+    border-radius: 2px;
+    border: none;
+}
+input[type=checkbox]:before {
+    content: "";
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border: none;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 2px;
+    cursor: pointer;
+}
+input[type=checkbox]:checked:after {
+    content: "✔";
+    color: rgba(66, 110, 215, 1);
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    position: absolute;
+    top: -3px;
+    left: 3px;
+}
+form > .clear {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 0;
+}
+form > .clear input {
+    font-family: Lato;
+    color: #fff;
+    background: none;
+    border: 0;
+    height: 40px;
+    width: 139px;
+    background-color: rgba(35, 35, 35, 1);
+    border-radius: 2px;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 400;
+    box-shadow: none;
+    cursor: pointer;
+}
+form > .clear input:hover {
+    background-color: rgba(85, 85, 85, 1);
+    border: none;
+    box-shadow: none;
+}
+form > .clear input:active {
+    background-color: rgba(0, 0, 0, .5);
+    background-image: none;
+    box-shadow: none;
+    border: none;
+}
+aside form::-webkit-scrollbar {
+    width: 4px;
+}
+aside form::-webkit-scrollbar-thumb {
+    background: rgba(133, 159, 229, 1);
+}
+
+@media all and (max-width: 980px) {
+    aside .form form > .indicates-required {
+        width: 100%;
+    }
+    form > .mc-field-group {
+        width: 100%;
+    }
+    form > .mc-address-group {
+        width: 98%;
+        margin-top: 0.5rem;
+    }
+    form > .mc-address-group .mc-field-group > select {
+        width: 100%;
+        margin-left: .3rem;
+    }
+    form > .clear {
+        bottom: 3rem;
+        height: auto;
+    }
+    input[type=checkbox]:checked:after {
+        font-size: 2rem;
+    }
+}

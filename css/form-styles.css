@@ -1,0 +1,35 @@
+aside > .hexagon .form {
+	width: 80%;
+}
+.mktoFormRow:first-of-type {
+	display: none !important;
+}
+.mktoForm .mktoRequiredField label.mktoLabel {
+	display: none;
+}
+.form #mktoForm_1416 input[type="tel"], .form #mktoForm_1416 input[type="email"], .form #mktoForm_1416 input[type="text"], .form #mktoForm_1416 select {
+	height: 40px !important;
+	padding-left: 1rem;
+	width: 100% !important;
+}
+.mktoForm .mktoFormRow {
+	flex-direction: row-reverse;
+}
+.mktoForm .mktoFormRow .mktoFormCol {
+	min-width: inherit !important;	
+	padding-right: inherit !important; 
+}
+.mktoForm > .mktoFormRow > .mktoFormCol:nth-of-type(2) {
+	width: 0%!important;
+}
+.mktoForm .mktoFieldWrap .mktoHtmlText.mktoHasWidth > div {
+	padding-left: unset !important;
+}
+.mktoForm .mktoFieldDescriptor .mktoRequiredField {
+	width: 96%!important;
+}
+.mktoForm p {
+	position: absolute;
+    left: 3px;
+    top: 0.4rem;
+}
